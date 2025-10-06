@@ -1,0 +1,118 @@
+# i. Create a directory called GitLab
+mkdir GitLab
+cd GitLab
+
+# ii. Put HelloWorld.c in that directory
+cat > HelloWorld.c << 'EOF'
+#include <stdio.h>
+#include <stdlib.h>
+int main(void) {
+    printf("Hello, world!\n");
+    return(EXIT_SUCCESS);
+}
+EOF
+
+# iii. Initialize a Git repository in the directory, creating a hidden .git folder
+git init
+
+# iv. Add HelloWorld.c to the repository
+git add HelloWorld.c
+
+# v. Commit the file
+git commit -m "Initial commit: Added HelloWorld.c"
+
+#vi. Create a public Github repository called CSC322-GitLab
+#Navigate to https://github.com
+#Click the "+" icon in the top-right corner
+#Select "New repository"
+#enter repository name: CSC322-GitLab
+#select Public visibility
+#Do NOT initialize with README, .gitignore, or license
+#Click "Create repository"
+
+# vii. Link the Git and Github repositories (Link local to remote) 
+# git remote add origin https://github.com/USERNAME/CSC322-GitLab.git
+git remote add origin https://github.com/danielypchan/CSC322-GitLab.git
+git branch -M main
+
+# viii. Push main branch (Push the initial repository)  
+git push -u origin main
+
+# ix. Edit HelloWorld.c to say "Hello Crool World!"
+# (change printf to: printf("Hello Crool World!\n");)
+sed -i 's/Hello, world!/Hello Crool World!/' HelloWorld.c
+
+# x. Commit and push HelloWorld.c
+git add HelloWorld.c
+git commit -m "Change greeting to Hello Crool World"
+git push
+
+# xi. Create a branch called "Happy"
+git branch Happy
+
+# xii. Switch to the Happy branch
+git checkout Happy
+
+# xiii. Push branch to Github
+git push -u origin Happy
+
+# xiv. Change to "Hello Happy World!"
+sed -i 's/Hello Crool World!/Hello Happy World!/' HelloWorld.c
+
+#xv. Commit and push
+git add HelloWorld.c
+git commit -m "Make it a Happy World"
+git push
+
+# xvi. Switch to the main branch
+git checkout main
+
+# xvii. Edit HelloWorld.c to "Hello Very Crool World!"
+# (printf("Hello Very Crool World!\n");)
+sed -i 's/Hello Crool World!/Hello Very Crool World!/' HelloWorld.c
+
+# xviii. Commit and push
+git add HelloWorld.c
+git commit -m "Very Crool World on main"
+git push
+
+# xix. Merge the changes from the Happy branch, to "Hello Very Happy World!" (Merge Happy)
+git merge Happy
+# (resolve merge manually if conflict: edit HelloWorld.c to)
+# printf("Hello Very Happy World!\n");
+
+# xx. Commit and Push Merge Resolution
+git add HelloWorld.c
+git commit -m "Merge Happy into main for Very Happy World"
+git push
+
+# xxi. Edit HelloWorld.c to "Hello Crazy World!"
+sed -i 's/Hello Happy World!/Hello Crazy World!/' HelloWorld.c
+# (printf("Hello Crazy World!\n");)
+
+#xxii. Commit and push
+git add HelloWorld.c
+git commit -m "Hello Crazy World"
+git push
+
+# List the commands you did at the terminal in a file called GittingAlong.txt
+history | grep -E "mkdir|cd GitLab|cat|git|sed|vi" > GittingAlong.txt
+
+
+# Generate GitLog.txt
+git log --all --graph --oneline --decorate > GitLog.txt
+
+# Generate GitLog.png:
+# Open web browser and navigate to your GitHub repository
+# Click on Insights tab
+# Select Network from the left sidebar
+# Wait for the network graph to load completely
+# Take a screenshot showing:
+# The main branch line
+# The Happy branch diverging and merging
+# All commit points
+# Branch labels
+# Save the screenshot as GitLog.PNG
+# git add GitLog.PNG
+# git commit -m "push GitLog.PNG"
+# git push
